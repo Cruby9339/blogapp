@@ -1,12 +1,19 @@
 export default function PostIndex(props) {
-    return `
+	return `
         <header>
             <h1>Posts Page</h1>
         </header>
+        <form>
+        
+		</form>
         <main>
             <div>
-                ${props.posts.map(post => `<h3>${post.title}</h3>`).join('')}   
+                ${props.posts.map(post => `<h3>${post.title}</h3>`)
+					   .join('')}   
             </div>
+            
+            
+            
         </main>
     `;
 }
