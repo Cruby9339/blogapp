@@ -1,5 +1,4 @@
 import Navbar from "./views/partials/Navbar.js";
-
 /**
  * Pushes the current URI to the URL bar and sets the HTML of the app div.
  * @param props - the com.codeup.demo.data required for view rendering

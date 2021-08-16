@@ -1,10 +1,13 @@
 package com.codeup.demo.data;
 
+import org.apache.catalina.startup.UserConfig;
+
 public class Post {
 
     private Long id;
     private String title;
     private String content;
+
 
     public Post(Long id, String title, String content) {
         this.id = id;
