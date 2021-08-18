@@ -8,7 +8,7 @@ public class ViewController {
 
 
 
-    @RequestMapping({"/", "/about", "/posts", "/login", "/home", "/register"})
+    @RequestMapping({"/", "/about", "/posts", "/login", "/home", "/register", "/users"})
     public String showView(){
         return "forward:/index.html";
     }
