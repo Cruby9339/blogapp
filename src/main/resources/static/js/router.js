@@ -6,6 +6,7 @@ import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
+import User, {SearchEvent} from "./views/User.js";
 
 
 /**
@@ -63,6 +64,13 @@ export default function router(URI) {
             uri: '/register',
             title: 'Register',
             viewEvent: RegisterEvent
+        },
+        '/users':{
+            returnView: User,
+            state:{},
+            uri:'/users',
+            title: 'Users',
+            viewEvent: SearchEvent
         }
     };
 
