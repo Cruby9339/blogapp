@@ -2,12 +2,15 @@ package com.codeup.demo.data;
 
 import org.apache.catalina.startup.UserConfig;
 
+import java.util.Collection;
+
 public class Post {
 
     private Long id;
     private String title;
     private String content;
     private User user;
+    private Collection<Category> categories;
 
 
     public Post(Long id, String title, String content, User user) {
@@ -47,5 +50,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Collection<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<Category> categories) {
+        this.categories = categories;
     }
 }

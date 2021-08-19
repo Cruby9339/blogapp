@@ -1,15 +1,22 @@
 package com.codeup.demo.data;
 
+import java.util.Collection;
+
 public class Category {
 
     private long id;
     private String name;
+    private Collection<Post> posts;
+
 
     public Category(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    public Category(){
+
+    }
 
     public long getId() {
         return id;

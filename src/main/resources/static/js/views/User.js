@@ -9,7 +9,7 @@ export default function User(props) {
 </head>
 <body>
 <h1>Search</h1>
-
+<div class="container">
 <form id="search-form">
 	<label for="userId">Enter user ID</label>
 	<input id="userId" name="userId" type="text">
@@ -21,10 +21,18 @@ export default function User(props) {
     <h1>Update Password</h1>
     <label for="oldPassword">Old Password</label>
     <input id="oldPassword" name="oldPassword" type="password"/>
+    <label for="newPassword">New Password</label>
     <label for="newPassword" type="password"/>
     <input id="newPassword" name="newPassword" type="password"/>
     <button type="button" id="update-btn">Search</button>
 </form>
+	<div class="post-container row justify-around">
+                ${props.users.map(user => `
+					<div class="col-12"><h2>${user.username}</h2> <h2>${user.email}</h2></div>
+					${user.posts.map(post => `<div class="col-4"><h2>${post.title}</h2><h1>${post.content}</h1></div> `)}  `)
+					   .join('')}   
+            </div>
+</div>
 </body>
 </html>`;
 
@@ -71,8 +79,10 @@ function updatePassword() {
 
 			let request = {
 				method: "PUT",
-				headers: {"Accept": "application/json",
-					"Content-Type": "application/json"},
+				headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				},
 				Body: JSON.stringify(userPassObj)
 			}
 
