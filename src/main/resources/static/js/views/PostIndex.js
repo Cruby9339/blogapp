@@ -14,17 +14,13 @@ export default function PostIndex(props) {
    		<input id="content-create" type="text"><br>
    		<button id="submit-btn">Submit</button>
 		</form>
+		<form>
+		<input id="post-by-cat" type="text">
+		<button id="search-by-cat">Search By Category</button>
+		</form>
         <main>
             <div class="post-container">
-                ${props.posts.map(post => `
-					<div class="row"><h2>${post.title}</h2> <h2>${post.content}</h2> <h2>${post.id}</h2> 
-					<label for="edit-title">Edit Title</label>
-					<input type="text" class="edit-title" value="${post.title}" readonly> 
-					<label for="edit-content">Edit Content</label>
-					<input type="text" class="edit-content" value="${post.content}" readonly> 
-					<button data-id=${post.id} class="edit-btn">edit</button>
-   					<button data-id=${post.id} class="delete-btn">delete</button></div>`)
-					   .join('')}   
+                ${getPostsComponent(props.posts)}   
             </div>
    		
         </main>
@@ -32,11 +28,42 @@ export default function PostIndex(props) {
     `;
 }
 
+function getPostsComponent(posts) {
+	return posts.map(post => {
+		return `
+					<div class="row"><h2>${post.title}</h2> <h2>${post.content}</h2> <h2>${post.id}</h2> 
+					
+					<div class="categories">
+					${getCategoriesComponent(post.categories)}
+					
+					</div>
+					
+					<label for="edit-title">Edit Title</label>
+					<input type="text" class="edit-title" value="${post.title}" readonly> 
+					<label for="edit-content">Edit Content</label>
+					<input type="text" class="edit-content" value="${post.content}" readonly> 
+					<button data-id="${post.id}" "class="edit-btn">edit</button>
+   					<button data-id="${post.id}" class="delete-btn">delete</button></div>`
+	})
+				.join('')
+}
+
+function getCategoriesComponent(categories) {
+
+	return categories.map(category =>
+		`
+		<span>#${category.name}</span>
+
+		`
+	)
+}
+
 
 export function PostEvent() {
 	createEvent()
 	editEvent()
 	deleteEvent()
+	searchCategories()
 }
 
 
@@ -95,7 +122,6 @@ function editEvent() {
 }
 
 
-
 function submitEditEvent() {
 	let post = {
 		title: $(this)
@@ -130,25 +156,52 @@ function submitEditEvent() {
 }
 
 
-function deleteEvent(){
-	$(".delete-btn").click(function (){
+function deleteEvent() {
+	$(".delete-btn")
+		.click(function () {
 
-	let request = {
-		method: "DELETE",
-		headers: {"Content-Type": "application/json"},
-	}
+			let request = {
+				method: "DELETE",
+				headers: {"Content-Type": "application/json"},
+			}
 
-		let id = $(this)
-			.attr("data-id")
+			let id = $(this)
+				.attr("data-id")
 
-	fetch(`http://localhost:8080/api/posts/${id}`, request)
-		.then(res => {
-			console.log(res.status);
-			createView("/posts");
+			fetch(`http://localhost:8080/api/posts/${id}`, request)
+				.then(res => {
+					console.log(res.status);
+					createView("/posts");
+				})
+				.catch(error => {
+					console.log(error)
+					createView("/posts")
+				})
 		})
-		.catch(error => {
-			console.log(error)
-			createView("/posts")
+}
+
+function searchCategories() {
+	$("#search-by-cat")
+		.click(function () {
+			let categoryName = $("#post-by-cat")
+				.val()
+
+			let request = {
+				method: "GET",
+				headers: {"Content-Type": "application/json"}
+			}
+
+			//http://localhost:8080/api/categories?categoryName=Tech
+
+			fetch(`http://localhost:8080/api/categories?categoryName=${categoryName}`, request)
+				.then(res => {
+					console.log(res.status);
+					createView("/posts");
+				})
+				.catch(error => {
+					console.log(error)
+					createView("/posts")
+				})
 		})
-	})
+
 }

@@ -14,9 +14,9 @@ import java.util.List;
 public class UsersController {
 
     List<Post> posts = new ArrayList<Post>() {{
-        add(new Post(1L, "Title1", "This is a post", null));
-        add(new Post(2L, "Title2", "This is a post", null));
-        add(new Post(3L, "Title3", "This is a post", null));
+        add(new Post(1L, "Title1", "This is a post", null, null));
+        add(new Post(2L, "Title2", "This is a post", null, null));
+        add(new Post(3L, "Title3", "This is a post", null, null));
     }};
 
 

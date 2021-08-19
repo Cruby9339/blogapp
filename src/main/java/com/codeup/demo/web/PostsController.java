@@ -1,5 +1,6 @@
 package com.codeup.demo.web;
 
+import com.codeup.demo.data.Category;
 import com.codeup.demo.data.Post;
 import com.codeup.demo.data.User;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,16 @@ public class PostsController {
 
         User user = new User(1L, "Miyavi", "miyavi@email.com", "password", null);
 
+        List<Category>  categories = new ArrayList<>(){{
+            add(new Category(1L, "Spring Boot"));
+            add(new Category(2L, "JS views are dumb"));
+        }};
+
+
         return new ArrayList<Post>() {{
-            add(new Post(1L, "Title1", "This is a post", user));
-            add(new Post(2L, "Title2", "This is a post", user));
-            add(new Post(3L, "Title3", "This is a post", user));
+            add(new Post(1L, "Title1", "This is a post", user, categories));
+            add(new Post(2L, "Title2", "This is a post", user, categories));
+            add(new Post(3L, "Title3", "This is a post", user, categories));
         }};
     }
 

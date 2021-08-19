@@ -8,6 +8,13 @@ public class Category {
     private String name;
     private Collection<Post> posts;
 
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
 
     public Category(long id, String name) {
         this.id = id;

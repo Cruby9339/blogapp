@@ -29,7 +29,7 @@ export default function User(props) {
 	<div class="post-container row justify-around">
                 ${props.users.map(user => `
 					<div class="col-12"><h2>${user.username}</h2> <h2>${user.email}</h2></div>
-					${user.posts.map(post => `<div class="col-4"><h2>${post.title}</h2><h1>${post.content}</h1></div> `)}  `)
+					${user.posts.map(post => `<div class="col-4"><h2>${post.title}</h2><h1>${post.content}</h1></div>`)}  `)
 					   .join('')}   
             </div>
 </div>
