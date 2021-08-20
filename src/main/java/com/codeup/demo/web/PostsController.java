@@ -1,12 +1,11 @@
 package com.codeup.demo.web;
 
-import com.codeup.demo.data.Category;
-import com.codeup.demo.data.Post;
-import com.codeup.demo.data.User;
+import com.codeup.demo.data.category.Category;
+import com.codeup.demo.data.post.Post;
+import com.codeup.demo.data.user.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -20,14 +19,14 @@ public class PostsController {
 
         List<Category>  categories = new ArrayList<>(){{
             add(new Category(1L, "Spring Boot"));
-            add(new Category(2L, "JS views are dumb"));
+            add(new Category(2L, "JS views are very cool and not dumb!"));
         }};
 
 
         return new ArrayList<Post>() {{
-            add(new Post(1L, "Title1", "This is a post", user, categories));
-            add(new Post(2L, "Title2", "This is a post", user, categories));
-            add(new Post(3L, "Title3", "This is a post", user, categories));
+            add(new Post(1L, "Learning JS", "This is a post", user, categories));
+            add(new Post(2L, "Learning CSS", "This is a post", user, categories));
+            add(new Post(3L, "Learning Java", "This is a post", user, categories));
         }};
     }
 

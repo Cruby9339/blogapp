@@ -1,15 +1,36 @@
-package com.codeup.demo.data;
+package com.codeup.demo.data.post;
 
-import org.apache.catalina.startup.UserConfig;
+import com.codeup.demo.data.category.Category;
+import com.codeup.demo.data.user.User;
 
+import javax.persistence.*;
 import java.util.Collection;
 
+@Entity
+@Table(name="posts")
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length=120)
     private String title;
+
+    @Column(nullable = false)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "user id")
     private User user;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="post_category",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
     private Collection<Category> categories;
 
 
@@ -20,6 +41,8 @@ public class Post {
         this.user = user;
         this.categories = categories;
     }
+
+    public Post(){}
 
     public Long getId() {
         return id;

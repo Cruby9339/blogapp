@@ -12,6 +12,9 @@ export default function PostIndex(props) {
    		<input id="title-create" type="text"><br>
    		<label for="content-create">Post Content:</label>
    		<input id="content-create" type="text"><br>
+   		<select>
+   		
+		</select>
    		<button id="submit-btn">Submit</button>
 		</form>
 		<form>
@@ -20,6 +23,7 @@ export default function PostIndex(props) {
 		</form>
         <main>
             <div class="post-container">
+            
                 ${getPostsComponent(props.posts)}   
             </div>
    		
@@ -31,7 +35,7 @@ export default function PostIndex(props) {
 function getPostsComponent(posts) {
 	return posts.map(post => {
 		return `
-					<div class="row"><h2>${post.title}</h2> <h2>${post.content}</h2> <h2>${post.id}</h2> 
+					<div class="row mt-3"><h2 class="col-4">${post.user.username}</h2><h2 class="col-4">${post.title}</h2> <h2 class="col-4">${post.content}</h2>
 					
 					<div class="categories">
 					${getCategoriesComponent(post.categories)}
@@ -42,8 +46,8 @@ function getPostsComponent(posts) {
 					<input type="text" class="edit-title" value="${post.title}" readonly> 
 					<label for="edit-content">Edit Content</label>
 					<input type="text" class="edit-content" value="${post.content}" readonly> 
-					<button data-id="${post.id}" "class="edit-btn">edit</button>
-   					<button data-id="${post.id}" class="delete-btn">delete</button></div>`
+					<button data-id="${post.id}" class="edit-btn btn btn-primary mt-1">Edit</button>
+   					<button data-id="${post.id}" class="delete-btn btn btn-primary mt-1">Delete</button></div>`
 	})
 				.join('')
 }

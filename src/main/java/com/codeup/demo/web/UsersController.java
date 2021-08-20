@@ -1,7 +1,7 @@
 package com.codeup.demo.web;
 
-import com.codeup.demo.data.Post;
-import com.codeup.demo.data.User;
+import com.codeup.demo.data.post.Post;
+import com.codeup.demo.data.user.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
