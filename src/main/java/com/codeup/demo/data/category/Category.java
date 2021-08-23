@@ -1,6 +1,7 @@
 package com.codeup.demo.data.category;
 
 import com.codeup.demo.data.post.Post;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,15 +19,9 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
+    @JsonManagedReference
     private Collection<Post> posts;
 
-    public Collection<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Collection<Post> posts) {
-        this.posts = posts;
-    }
 
     public Category(long id, String name) {
         this.id = id;
@@ -52,4 +47,13 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
+
 }

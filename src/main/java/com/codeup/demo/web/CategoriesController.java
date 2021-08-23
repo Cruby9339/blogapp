@@ -1,10 +1,9 @@
 package com.codeup.demo.web;
 
 import com.codeup.demo.data.category.Category;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.codeup.demo.data.category.CategoryRepository;
+import com.codeup.demo.data.user.UserRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +13,23 @@ import java.util.List;
 public class CategoriesController {
 
 
-
-    List<Category> categories = new ArrayList<>(){{
-        add(new Category(1L, "Spring Boots"));
-    }};
+    private final CategoryRepository categoryRepository;
 
 
-    @GetMapping
-    private Category getPostsByCategory(@RequestParam String categoryName) {
-       return null;
+    public CategoriesController(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
+
+    @GetMapping("{name}")
+    private Category getPostsByCategory(@PathVariable String name) {
+       return categoryRepository.findByName(name);
+    }
+
+
 
     @GetMapping
     private List<Category> getCategories(){
-        return categories;
+        return categoryRepository.findAll();
     }
 
 

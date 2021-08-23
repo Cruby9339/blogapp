@@ -2,6 +2,7 @@ package com.codeup.demo.web;
 
 import com.codeup.demo.data.category.Category;
 import com.codeup.demo.data.post.Post;
+import com.codeup.demo.data.post.PostRepository;
 import com.codeup.demo.data.user.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,22 +13,20 @@ import java.util.List;
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
+    private final PostRepository postRepository;
+
+    public PostsController(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
     @GetMapping
     private List<Post> getPosts() {
+        return postRepository.findAll();
+    }
 
-        User user = new User(1L, "Miyavi", "miyavi@email.com", "password", null);
-
-        List<Category>  categories = new ArrayList<>(){{
-            add(new Category(1L, "Spring Boot"));
-            add(new Category(2L, "JS views are very cool and not dumb!"));
-        }};
-
-
-        return new ArrayList<Post>() {{
-            add(new Post(1L, "Learning JS", "This is a post", user, categories));
-            add(new Post(2L, "Learning CSS", "This is a post", user, categories));
-            add(new Post(3L, "Learning Java", "This is a post", user, categories));
-        }};
+    @GetMapping("{id}")
+    private Post getPostById(@PathVariable Long id){
+        return postRepository.findById(id).get();
     }
 
 
@@ -35,6 +34,7 @@ public class PostsController {
     private void createPost(@RequestBody Post newPost) {
         System.out.println(newPost.getTitle());
         System.out.println(newPost.getContent());
+        postRepository.save(newPost);
     }
 
 
@@ -42,12 +42,13 @@ public class PostsController {
     private void updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
         System.out.println(updatedPost.getTitle());
         System.out.println(updatedPost.getContent());
+        postRepository.save(updatedPost);
     }
 
 
     @DeleteMapping("{id}")
-    private void deletePost(@PathVariable long id) {
-        System.out.println("The id that was deleted was: " + id);
+    private void deletePost(@PathVariable Long id) {
+        postRepository.deleteById(id);
     }
 
 
