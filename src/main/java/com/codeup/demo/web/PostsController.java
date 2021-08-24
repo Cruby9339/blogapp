@@ -1,21 +1,22 @@
 package com.codeup.demo.web;
 
-import com.codeup.demo.data.category.Category;
 import com.codeup.demo.data.post.Post;
 import com.codeup.demo.data.post.PostRepository;
-import com.codeup.demo.data.user.User;
+import com.codeup.demo.services.EmailService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
+    private final EmailService emailService;
+
     private final PostRepository postRepository;
 
-    public PostsController(PostRepository postRepository) {
+    public PostsController(EmailService emailService, PostRepository postRepository) {
+        this.emailService = emailService;
         this.postRepository = postRepository;
     }
 
@@ -35,6 +36,7 @@ public class PostsController {
         System.out.println(newPost.getTitle());
         System.out.println(newPost.getContent());
         postRepository.save(newPost);
+        emailService.prepareAndSend(newPost, "Do not reply", "Do not reply");
     }
 
 
@@ -50,6 +52,10 @@ public class PostsController {
     private void deletePost(@PathVariable Long id) {
         postRepository.deleteById(id);
     }
+
+
+
+
 
 
 }
