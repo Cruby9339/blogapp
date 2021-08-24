@@ -3,37 +3,43 @@ package com.codeup.demo.data.post;
 import com.codeup.demo.data.category.Category;
 import com.codeup.demo.data.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length=120)
+    @Column(nullable = false, length = 120)
     private String title;
 
     @Column(nullable = false)
     private String content;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonIgnoreProperties({"posts", "password"})
     private User user;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
-    @JoinTable(
-            name="post_category",
-            joinColumns={@JoinColumn(name="post_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}
     )
+    @JoinTable(
+            name = "post_category",
+            joinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+    @JsonIgnoreProperties("posts")
     private Collection<Category> categories;
 
 
@@ -45,7 +51,8 @@ public class Post {
         this.categories = categories;
     }
 
-    public Post(){}
+    public Post() {
+    }
 
     public Long getId() {
         return id;
