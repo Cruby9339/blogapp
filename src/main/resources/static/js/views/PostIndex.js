@@ -8,6 +8,8 @@ export default function PostIndex(props) {
             <h1>Posts Page</h1>
         </header>
    		<form action="">
+   		<label for="user">Username</label>
+   		<input id="username" type="text">
    		<label for="title-create">Post Title:</label>
    		<input id="title-create" type="text"><br>
    		<label for="content-create">Post Content:</label>
@@ -78,8 +80,11 @@ function createEvent() {
 				.val()
 			let content = $("#content-create")
 				.val()
+			let user = $("#username")
+				.val()
 
 			let postObj = {
+				"username": user,
 				"title": title,
 				"content": content
 			}
