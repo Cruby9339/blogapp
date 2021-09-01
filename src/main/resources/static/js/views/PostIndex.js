@@ -8,16 +8,15 @@ export default function PostIndex(props) {
             <h1>Posts Page</h1>
         </header>
    		<form action="">
+   		<div class="form-group card">
    		<label for="user">Username</label>
-   		<input id="username" type="text">
+   		<input id="username" class="form-control" type="text">
    		<label for="title-create">Post Title:</label>
-   		<input id="title-create" type="text"><br>
+   		<input id="title-create" class="form-control" type="text"><br>
    		<label for="content-create">Post Content:</label>
-   		<input id="content-create" type="text"><br>
-   		<select>
-   		
-		</select>
-   		<button id="submit-btn">Submit</button>
+   		<input id="content-create" class="form-control" type="text"><br>
+   		<button id="submit-btn" class="btn btn-primary">Submit</button>
+   		</div>
 		</form>
 		<form>
 		<input id="post-by-cat" type="text">
@@ -37,7 +36,7 @@ export default function PostIndex(props) {
 function getPostsComponent(posts) {
 	return posts.map(post => {
 		return `
-					<div class="row mt-3"><h2 class="col-4">${post.user.username}</h2><h2 class="col-4">${post.title}</h2> <h2 class="col-4">${post.content}</h2>
+					<div class="row mt-3"><h2 class="col-6">User: ${post.user.username}</h2><h2 class="col-6">Title: ${post.title}</h2> <h2 class="col-12">${post.content}</h2>
 					
 					<div class="categories">
 					${getCategoriesComponent(post.categories)}
@@ -64,14 +63,12 @@ function getCategoriesComponent(categories) {
 	)
 }
 
-
 export function PostEvent() {
 	createEvent()
 	editEvent()
 	deleteEvent()
 	searchCategories()
 }
-
 
 function createEvent() {
 	$("#submit-btn")
@@ -108,7 +105,6 @@ function createEvent() {
 		})
 }
 
-
 function editEvent() {
 	$(".edit-btn")
 		.click(function () {
@@ -129,7 +125,6 @@ function editEvent() {
 
 		})
 }
-
 
 function submitEditEvent() {
 	let post = {
@@ -163,7 +158,6 @@ function submitEditEvent() {
 			createView("/posts")
 		})
 }
-
 
 function deleteEvent() {
 	$(".delete-btn")
