@@ -24,6 +24,9 @@ export default function Register(props) {
 
 }
 
+
+
+
 export function RegisterEvent() {
 	registerUser()
 }
