@@ -8,4 +8,6 @@ export default function Navbar(props) {
             <a href="/users" class="nav-link" data-link>Users</a>
         </nav>
     `;
+
+
 }
