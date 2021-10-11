@@ -8,7 +8,7 @@ export default function Register(props) {
     <title>Register</title>
 </head>
 <body>
-<h1>Register</h1>
+<h1 class="text-center">Register</h1>
 
 <form id="register-form">
     <label for="username">Username</label>
