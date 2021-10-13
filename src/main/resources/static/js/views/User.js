@@ -8,7 +8,7 @@ export default function User(props) {
     <title>Search and update</title>
 </head>
 <body>
-<h1>Search</h1>
+<h1 class="text-center">Search</h1>
 <div class="container">
 <form id="search-form" class="form-control">
 	<label for="userId">Enter user ID</label>
