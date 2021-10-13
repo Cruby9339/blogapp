@@ -10,7 +10,7 @@ export default function User(props) {
 <body>
 <h1>Search</h1>
 <div class="container">
-<form id="search-form">
+<form id="search-form" class="form-control">
 	<label for="userId">Enter user ID</label>
 	<input id="userId" name="userId" type="text">
     <label for="username">Search by Username</label>
