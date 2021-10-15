@@ -17,7 +17,7 @@ export default function User(props) {
     <input id="username" name="username" type="text"/>
     <label for="email">Search for Email</label>
     <input id="email" name="email" type="email"/>
-    <button type="button" id="search-btn">Search</button>
+    <button type="button" class="btn btn-dark" id="search-btn">Search</button>
     <h1>Update Password</h1>
     <label for="oldPassword">Old Password</label>
     <input id="oldPassword" name="oldPassword" type="password"/>
